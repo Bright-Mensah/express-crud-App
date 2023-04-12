@@ -115,7 +115,7 @@ app.get("/task", function (req, res) {
   });
 });
 
-// get task by id update and delete them
+// get task by id , update and delete them
 
 app.get("/task/:id", (req, res) => {
   let id = req.params.id;
