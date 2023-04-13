@@ -18,7 +18,7 @@ const AddTask = () => {
       // if all fields are not empty  add task
       const addTask = async function () {
         const request = await fetch("http://localhost:3400/task", {
-          method: post,
+          method: "post",
           headers: {
             Accept: "application/json, text/plain, */*",
             "Content-Type": "application/json",
@@ -27,16 +27,15 @@ const AddTask = () => {
             title,
             description,
           }),
-        })
-          .then((respond) => console.log(respond))
-          .catch(() =>
-            console.log("something went wrong, try again later!!!!")
-          );
+        });
 
         const data = await request.json();
+        console.log(data);
 
-        {
-          data ? console.log(data) : console.log("data not set");
+        if (data.exist) {
+          toast.error("Task already exist");
+        } else if (data.success) {
+          toast.success("task added successfully");
         }
       };
       addTask();

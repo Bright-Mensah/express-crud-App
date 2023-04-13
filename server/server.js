@@ -95,14 +95,14 @@ app.post("/task", function (req, res) {
     })
     .then(function (taskExist) {
       if (taskExist) {
-        console.log("task exist");
-      } else {
+        res.send({ exist: true });
+
         let userTask = new taskSchema({
           title: req.body.title,
           description: req.body.description,
         });
         userTask.save().then(function () {
-          console.log("task added");
+          res.send({ success: true });
         });
       }
     });
