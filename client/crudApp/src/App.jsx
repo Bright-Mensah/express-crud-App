@@ -5,6 +5,7 @@ import Signup from "./Components/Signup";
 import Home from "./Components/Home";
 import AddTask from "./Components/AddTask";
 import Tasks from "./Components/Tasks";
+import edit from "./Components/edit";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/home" Component={Home} />
         <Route exact path="/addTask" Component={AddTask} />
         <Route exact path="/tasks" Component={Tasks} />
+        <Route exact path="/task/:id" Component={edit} />
       </Routes>
     </div>
   );

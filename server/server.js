@@ -4,6 +4,9 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import userSchema from "./Schema/userSchema.js";
 import taskSchema from "./Schema/taskSchema.js";
+import { v4 as uuidv4 } from "uuid";
+
+import { ObjectId } from "mongodb";
 
 const app = express();
 
@@ -85,25 +88,27 @@ app.post("/login", (req, res) => {
       console.log("something went wrong.");
     });
 });
-
 // add task
-app.post("/task", function (req, res) {
+app.post("/task", (req, res) => {
   taskSchema
     .findOne({
       title: req.body.title,
       description: req.body.description,
     })
-    .then(function (taskExist) {
+    .then((taskExist) => {
       if (taskExist) {
-        res.send({ exist: true });
-
-        let userTask = new taskSchema({
+        res.send({ error: "task exist" });
+      } else {
+        let task = new taskSchema({
           title: req.body.title,
           description: req.body.description,
         });
-        userTask.save().then(function () {
-          res.send({ success: true });
-        });
+        // taskId: uuidv4().replace(/-/g, ""),
+
+        task
+          .save()
+          .then(() => res.send({ success: true }))
+          .catch((error) => console.log(error));
       }
     });
 });
@@ -119,11 +124,12 @@ app.get("/task", function (req, res) {
 
 app.get("/task/:id", (req, res) => {
   let id = req.params.id;
-  taskSchema.findById(id).then((respond) => {
-    if (respond) {
+
+  if (mongoose.Types.ObjectId.isValid(id)) {
+    taskSchema.findById(id).then((respond) => {
       res.send(respond);
-    }
-  });
+    });
+  }
 });
 
 // update task
@@ -136,7 +142,8 @@ app.put("/task/:id", function (req, res) {
       title: req.body.title,
       description: req.body.description,
     })
-    .then((respond) => res.send({ respond, msg: "task updated" }));
+    .then((respond) => res.send({ respond, success: true }))
+    .catch((error) => res.send(error));
 });
 
 app.delete("/task/:id", function (req, res) {
