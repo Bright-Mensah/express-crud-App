@@ -6,8 +6,8 @@ const taskSchema = new Schema(
       type: String,
     },
     description: { type: String },
-    date: { type: String, default: Date },
-    // taskId: { type: String },
+    createdAt: { type: String, default: Date },
+    // updatedAt: { type: String, default: Date },
   },
   { collection: "tasks" }
 );

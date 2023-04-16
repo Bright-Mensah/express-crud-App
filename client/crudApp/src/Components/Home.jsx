@@ -65,24 +65,6 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div class="bg-white overflow-hidden shadow rounded-lg">
-              <div class="px-4 py-5 sm:p-6">
-                <h3 class="text-lg leading-6 font-medium text-gray-900">
-                  Orders
-                </h3>
-                <div class="mt-2 max-w-xl text-sm text-gray-500">
-                  <p>View and manage orders.</p>
-                </div>
-                <div class="mt-5">
-                  <a
-                    href="#"
-                    class="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                  >
-                    View all orders
-                  </a>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

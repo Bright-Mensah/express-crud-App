@@ -4,9 +4,6 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import userSchema from "./Schema/userSchema.js";
 import taskSchema from "./Schema/taskSchema.js";
-import { v4 as uuidv4 } from "uuid";
-
-import { ObjectId } from "mongodb";
 
 const app = express();
 
@@ -103,7 +100,6 @@ app.post("/task", (req, res) => {
           title: req.body.title,
           description: req.body.description,
         });
-        // taskId: uuidv4().replace(/-/g, ""),
 
         task
           .save()
@@ -151,7 +147,7 @@ app.delete("/task/:id", function (req, res) {
 
   taskSchema
     .findByIdAndDelete(id)
-    .then(() => res.send({ msg: "task has been deleted" }))
+    .then(() => res.send({ success: "task has been deleted" }))
     .catch((error) => res.send(error));
 });
 const port = 3400;
